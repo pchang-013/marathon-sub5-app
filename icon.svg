@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5E3A"/>
+      <stop offset="50%" stop-color="#FF2A68"/>
+      <stop offset="100%" stop-color="#6B11FF"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base (Apple iOS App Icon shape) -->
+  <rect width="512" height="512" rx="115" fill="url(#bgGrad)"/>
+  <rect width="512" height="512" rx="115" fill="url(#glowGrad)"/>
+
+  <!-- Icon Graphic: Running figure + Pace arc -->
+  <g filter="url(#shadow)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Pace Track Arc -->
+    <path d="M 90 380 A 190 190 0 1 1 422 380" stroke-width="14" stroke-opacity="0.35" stroke-dasharray="8 12"/>
+    <path d="M 90 380 A 190 190 0 0 1 256 66" stroke-width="16" stroke="#FFFFFF"/>
+    
+    <!-- Runner Silhouette Elements in White -->
+    <!-- Head -->
+    <circle cx="285" cy="180" r="26" fill="#FFFFFF" stroke="none"/>
+    <!-- Torso -->
+    <path d="M 270 215 L 245 285 L 290 310" stroke-width="22"/>
+    <!-- Forward Leg -->
+    <path d="M 245 285 L 210 350 L 165 355" stroke-width="20"/>
+    <!-- Back Leg -->
+    <path d="M 290 310 L 335 345 L 375 405" stroke-width="20"/>
+    <!-- Front Arm -->
+    <path d="M 265 225 L 320 235 L 340 200" stroke-width="18"/>
+    <!-- Back Arm -->
+    <path d="M 260 235 L 215 260 L 185 240" stroke-width="18"/>
+  </g>
+
+  <!-- Sub-5 Badge -->
+  <g transform="translate(256, 435)">
+    <rect x="-95" y="-22" width="190" height="44" rx="22" fill="#FFFFFF" fill-opacity="0.22" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="0" y="7" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="22" font-weight="800" letter-spacing="2" text-anchor="middle">SUB-5H 42.2K</text>
+  </g>
+</svg>

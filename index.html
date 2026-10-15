@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>HK Marathon 2027 — Sub-5h Training Plan</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sub-5 Marathon">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="theme-color" content="#FF2A68">
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: rgba(22, 27, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(33, 38, 45, 0.9);
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #ff3366;
+      --accent-gradient: linear-gradient(135deg, #ff5e3a 0%, #ff2a68 50%, #8a2be2 100%);
+      --accent-glow: rgba(255, 42, 104, 0.25);
+      --easy-color: #2ea043;
+      --quality-color: #f0883e;
+      --long-color: #a371f7;
+      --rest-color: #6e7681;
+      --race-color: #ffd700;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f6f9;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-hover: #ffffff;
+      --text-main: #1c1e21;
+      --text-muted: #65676b;
+      --accent: #e60049;
+      --accent-gradient: linear-gradient(135deg, #ff4500 0%, #e60049 50%, #6f42c1 100%);
+      --accent-glow: rgba(230, 0, 73, 0.15);
+      --easy-color: #1a7f37;
+      --quality-color: #cf5600;
+      --long-color: #8250df;
+      --rest-color: #8c959f;
+      --race-color: #b08800;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+      min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 16px 20px;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background-color: rgba(13, 17, 23, 0.82);
+      border-bottom: 1px solid var(--card-border);
+      padding: 14px 20px;
+      transition: background-color 0.2s ease;
+    }
+
+    [data-theme="light"] header {
+      background-color: rgba(244, 246, 249, 0.85);
+    }
+
+    .nav-content {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px var(--accent-glow);
+      flex-shrink: 0;
+    }
+
+    .brand-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffffff;
+    }
+
+    .brand-title h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-title p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .btn-icon:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    /* Hero / Countdown / Summary */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-gradient);
+    }
+
+    .countdown-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .countdown-timer {
+      display: flex;
+      gap: 14px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .timer-unit {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--card-border);
+      padding: 8px 14px;
+      border-radius: 12px;
+      min-width: 65px;
+    }
+
+    [data-theme="light"] .timer-unit {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .timer-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .timer-lbl {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Stats Card */
+    .stats-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    [data-theme="light"] .stat-box {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .stat-box-lbl {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .stat-box-val {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    [data-theme="light"] .progress-bar-wrap {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent-gradient);
+      border-radius: 6px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-pills {
+      display: flex;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .pill-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 280px;
+      min-width: 200px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 8px 14px 8px 36px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      fill: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Week Accordion Card */
+    .week-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .week-card.is-current {
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .week-card.is-completed {
+      opacity: 0.88;
+    }
+
+    .week-header {
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.015);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.15s ease;
+    }
+
+    .week-header:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    [data-theme="light"] .week-header:hover {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .week-card.open .week-header {
+      border-bottom-color: var(--card-border);
+    }
+
+    .week-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .week-badge {
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    .week-card.is-current .week-badge {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .week-dates {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .week-focus {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .week-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .week-mileage {
+      text-align: right;
+    }
+
+    .mileage-actual {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+    }
+
+    .mileage-target {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .chevron-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .week-card.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Week Content & Run Rows */
+    .week-content {
+      display: none;
+      padding: 16px 20px;
+    }
+
+    .week-card.open .week-content {
+      display: block;
+    }
+
+    .runs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .runs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .run-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    [data-theme="light"] .run-card {
+      background: #fdfdfd;
+      border-color: rgba(0,0,0,0.06);
+    }
+
+    .run-card.completed {
+      background: rgba(46, 160, 67, 0.08);
+      border-color: rgba(46, 160, 67, 0.3);
+    }
+
+    .run-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .run-day-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-easy { background: rgba(46, 160, 67, 0.15); color: var(--easy-color); }
+    .badge-quality { background: rgba(240, 136, 62, 0.15); color: var(--quality-color); }
+    .badge-long { background: rgba(163, 113, 247, 0.15); color: var(--long-color); }
+    .badge-rest { background: rgba(110, 118, 129, 0.15); color: var(--rest-color); }
+    .badge-race { background: rgba(255, 215, 0, 0.2); color: var(--race-color); }
+
+    /* Custom Checkbox */
+    .checkbox-wrap {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 2px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.2s cubic-bezier(0.3, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+
+    .checkbox-wrap:hover {
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    .checkbox-wrap.checked {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .checkbox-wrap svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.2s cubic-bezier(0.3, 0, 0.2, 1);
+    }
+
+    .checkbox-wrap.checked svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .run-desc {
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .run-card.completed .run-desc {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .run-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px dashed var(--card-border);
+      margin-top: auto;
+      gap: 8px;
+    }
+
+    .actual-km-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .actual-km-input {
+      width: 62px;
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      outline: none;
+    }
+
+    [data-theme="light"] .actual-km-input {
+      background: #f0f0f0;
+    }
+
+    .actual-km-input:focus {
+      border-color: var(--accent);
+    }
+
+    .km-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .btn-step {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      line-height: 1;
+    }
+
+    .btn-step:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Target Pace Reference Sheet Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      max-width: 580px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .pace-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.88rem;
+    }
+
+    .pace-table th, .pace-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .pace-table th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(22, 27, 34, 0.95);
+      border: 1px solid var(--accent);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      pointer-events: none;
+      z-index: 200;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-content">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+        </div>
+        <div class="brand-title">
+          <h1>Sub-5 Marathon Plan</h1>
+          <p>15 Weeks • Target Pace: 7:00/km (4h55m)</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-icon" id="btnPaces" title="Pace Guide & Fueling" onclick="openModal('paceModal')">⚡</button>
+        <button class="btn-icon" id="btnExport" title="Export Progress Backup" onclick="exportData()">💾</button>
+        <button class="btn-icon" id="btnImport" title="Import Progress Backup" onclick="triggerImport()">📥</button>
+        <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)">
+        <button class="btn-icon" id="btnTheme" title="Toggle Theme" onclick="toggleTheme()">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero / Race Countdown & Summary -->
+    <div class="hero-grid">
+      <div class="hero-card">
+        <div class="countdown-title">
+          <span>🏁</span> RACE DAY COUNTDOWN
+        </div>
+        <div style="font-size: 1.1rem; font-weight: 700; margin-top: 4px;">
+          Sunday, January 17 — 42.195 km
+        </div>
+        <div class="countdown-timer" id="countdownTimer">
+          <div class="timer-unit">
+            <div class="timer-val" id="daysVal">--</div>
+            <div class="timer-lbl">Days</div>
+          </div>
+          <div class="timer-unit">
+            <div class="timer-val" id="hoursVal">--</div>
+            <div class="timer-lbl">Hours</div>
+          </div>
+          <div class="timer-unit">
+            <div class="timer-val" id="minsVal">--</div>
+            <div class="timer-lbl">Mins</div>
+          </div>
+          <div class="timer-unit">
+            <div class="timer-val" id="secsVal">--</div>
+            <div class="timer-lbl">Secs</div>
+          </div>
+        </div>
+        <div class="hero-subtitle">
+          Goal: Break 5 hours with a 7:00/km race pace strategy and steady negative/even splits.
+        </div>
+      </div>
+
+      <div class="hero-card stats-card">
+        <div>
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-box-lbl">Completed</div>
+              <div class="stat-box-val" id="totalDoneVal">0 km</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-lbl">Plan Target</div>
+              <div class="stat-box-val" id="totalPlanVal">516 km</div>
+            </div>
+          </div>
+          <div class="stat-row" style="margin-bottom: 12px;">
+            <div class="stat-box">
+              <div class="stat-box-lbl">Runs Done</div>
+              <div class="stat-box-val" id="runsCountVal">0 / 60</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-lbl">Overall %</div>
+              <div class="stat-box-val" id="percentVal">0%</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="overallProgressBar" style="width: 0%;"></div>
+          </div>
+          <div class="progress-labels">
+            <span>Progress</span>
+            <span id="progressSummaryText">0 km remaining</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls / Filters -->
+    <div class="controls-bar">
+      <div class="filter-pills">
+        <button class="pill-btn active" onclick="setFilter('all', this)">All (15w)</button>
+        <button class="pill-btn" onclick="setFilter('current', this)">Current</button>
+        <button class="pill-btn" onclick="setFilter('pending', this)">Pending</button>
+        <button class="pill-btn" onclick="setFilter('done', this)">Completed</button>
+      </div>
+
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="searchInput" placeholder="Search (MP, Hills, Tempo...)" oninput="filterWorkouts()">
+      </div>
+    </div>
+
+    <!-- Weeks List Accordion -->
+    <div id="weeksList"></div>
+
+  </div>
+
+  <!-- Pace & Nutrition Reference Modal -->
+  <div class="modal-overlay" id="paceModal" onclick="closeModalOnBg(event, 'paceModal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Sub-5 Hour Pace & Fueling Guide</h3>
+        <button class="modal-close" onclick="closeModal('paceModal')">&times;</button>
+      </div>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+        To achieve sub-5 hours, required average pace is <strong>7:06/km</strong> (4:59:59). Training at <strong>7:00/km</strong> provides a 4-minute buffer for hill climbs and water stations.
+      </p>
+
+      <table class="pace-table">
+        <thead>
+          <tr>
+            <th>Workout Type</th>
+            <th>Pace (min/km)</th>
+            <th>Effort / RPE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--easy-color)">Easy / Recovery</strong></td>
+            <td>7:50 – 8:10</td>
+            <td>RPE 3–4 (Conversational, zone 2)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--quality-color)">Marathon Pace (MP)</strong></td>
+            <td>7:00</td>
+            <td>RPE 5–6 (Smooth, rhythm-focused)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--quality-color)">Tempo / Threshold</strong></td>
+            <td>6:55</td>
+            <td>RPE 7 (Comfortably hard)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--long-color)">Long Runs (Steady)</strong></td>
+            <td>7:35 – 7:45</td>
+            <td>RPE 4–5 (Controlled aerobic stamina)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--race-color)">Race Day Target</strong></td>
+            <td>7:00 / km</td>
+            <td>Estimated Finish: 4h 55m</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin-top:20px; margin-bottom:8px; font-size:1rem;">Fueling & Hydration Strategy</h4>
+      <ul style="font-size:0.85rem; color:var(--text-muted); padding-left:18px; line-height:1.6;">
+        <li><strong>Practice in training:</strong> Starting Week 5, take 1 gel at 8 km; Week 6 take 2 gels.</li>
+        <li><strong>Race day cadence:</strong> Consume 1 energy gel every 40–45 mins (~6–7 km) with water, never with sports drinks alone.</li>
+        <li><strong>Electrolytes:</strong> Practice taking salt tablets / electrolyte chews on long runs over 20 km (Weeks 7, 9, 10, 12).</li>
+      </ul>
+
+      <div style="margin-top:20px; text-align:right;">
+        <button class="pill-btn active" onclick="closeModal('paceModal')">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div class="toast" id="toastMsg">Changes saved</div>
+
+  <script>
+    // Full 15-week training plan dataset transcribed from the Numbers file
+    const DEFAULT_PLAN = [
+      {
+        week: 1,
+        dates: "Oct 05 – Oct 11",
+        focus: "Adapt to 4 running days",
+        plannedTotal: 23,
+        runs: [
+          { day: "Mon", type: "easy", name: "5 km easy", targetKm: 5, done: false, actualKm: null },
+          { day: "Wed", type: "easy", name: "6 km easy", targetKm: 6, done: true, actualKm: 10 },
+          { day: "Fri", type: "easy", name: "3 km easy", targetKm: 3, done: true, actualKm: 5 },
+          { day: "Sat", type: "long", name: "9 km easy (7:50–8:10/km)", targetKm: 9, done: true, actualKm: 11 }
+        ]
+      },
+      {
+        week: 2,
+        dates: "Oct 12 – Oct 18",
+        focus: "Easy rhythm; form focus",
+        plannedTotal: 27,
+        runs: [
+          { day: "Mon", type: "easy", name: "6 km easy", targetKm: 6, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "6 km (incl. 4 × 20s strides)", targetKm: 6, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "4 km easy", targetKm: 4, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "11 km easy", targetKm: 11, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 3,
+        dates: "Oct 19 – Oct 25",
+        focus: "First taste of 7:00 race pace",
+        plannedTotal: 29,
+        runs: [
+          { day: "Mon", type: "easy", name: "6 km easy", targetKm: 6, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "6 km MP (1k warm + 4k @ 7:00 + 1k cool)", targetKm: 6, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "4 km easy", targetKm: 4, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "13 km easy", targetKm: 13, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 4,
+        dates: "Oct 26 – Nov 01",
+        focus: "Cutback & recovery week",
+        plannedTotal: 20,
+        runs: [
+          { day: "Mon", type: "easy", name: "5 km easy", targetKm: 5, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "5 km easy (rolling inclines)", targetKm: 5, done: false, actualKm: null },
+          { day: "Fri", type: "rest", name: "Rest", targetKm: 0, done: true, actualKm: 0 },
+          { day: "Sat", type: "long", name: "10 km easy", targetKm: 10, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 5,
+        dates: "Nov 02 – Nov 08",
+        focus: "Aerobic base building",
+        plannedTotal: 34,
+        runs: [
+          { day: "Mon", type: "easy", name: "7 km easy", targetKm: 7, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "7 km Tempo (1k warm + 5k @ 6:55 + 1k cool)", targetKm: 7, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "4 km easy", targetKm: 4, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "16 km steady (take 1 gel at km 8)", targetKm: 16, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 6,
+        dates: "Nov 09 – Nov 15",
+        focus: "Practice fuel timing",
+        plannedTotal: 37,
+        runs: [
+          { day: "Mon", type: "easy", name: "7 km easy", targetKm: 7, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "8 km MP (1k warm + 6k @ 7:00 + 1k cool)", targetKm: 8, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "4 km easy", targetKm: 4, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "18 km easy (take 2 gels)", targetKm: 18, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 7,
+        dates: "Nov 16 – Nov 22",
+        focus: "Confidence check on 7:00 pace",
+        plannedTotal: 42,
+        runs: [
+          { day: "Mon", type: "easy", name: "8 km easy", targetKm: 8, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "8 km Hills (6 × 90s bridge/flyover ramps)", targetKm: 8, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "5 km easy", targetKm: 5, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "21.1 km Half (16k easy + last 5k @ 7:00)", targetKm: 21.1, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 8,
+        dates: "Nov 23 – Nov 29",
+        focus: "Mid-cycle cutback week",
+        plannedTotal: 26,
+        runs: [
+          { day: "Mon", type: "easy", name: "6 km easy", targetKm: 6, done: false, actualKm: null },
+          { day: "Wed", type: "easy", name: "6 km easy", targetKm: 6, done: false, actualKm: null },
+          { day: "Fri", type: "rest", name: "Rest", targetKm: 0, done: true, actualKm: 0 },
+          { day: "Sat", type: "long", name: "14 km easy", targetKm: 14, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 9,
+        dates: "Nov 30 – Dec 06",
+        focus: "Practice running fast on tired legs",
+        plannedTotal: 46,
+        runs: [
+          { day: "Mon", type: "easy", name: "8 km easy", targetKm: 8, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "9 km MP (1k warm + 7k @ 7:00 + 1k cool)", targetKm: 9, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "5 km easy", targetKm: 5, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "24 km (19k easy + last 5k @ 7:00)", targetKm: 24, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 10,
+        dates: "Dec 07 – Dec 13",
+        focus: "Hydration & electrolyte drill",
+        plannedTotal: 49,
+        runs: [
+          { day: "Mon", type: "easy", name: "8 km easy", targetKm: 8, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "9 km Hills (Overpass climbs + descents)", targetKm: 9, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "5 km easy", targetKm: 5, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "27 km steady (7:35–7:45/km)", targetKm: 27, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 11,
+        dates: "Dec 14 – Dec 20",
+        focus: "Mini-cutback before peak",
+        plannedTotal: 34,
+        runs: [
+          { day: "Mon", type: "easy", name: "7 km easy", targetKm: 7, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "7 km easy with 4 strides", targetKm: 7, done: false, actualKm: null },
+          { day: "Fri", type: "rest", name: "Rest", targetKm: 0, done: true, actualKm: 0 },
+          { day: "Sat", type: "long", name: "20 km comfortable pace", targetKm: 20, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 12,
+        dates: "Dec 21 – Dec 27",
+        focus: "Dress Rehearsal (Race kit & full fueling)",
+        plannedTotal: 54, // "53-55 km" average 54
+        runs: [
+          { day: "Mon", type: "easy", name: "8 km easy", targetKm: 8, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "10 km MP (2k warm + 7k @ 7:00 + 1k cool)", targetKm: 10, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "5 km easy", targetKm: 5, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "30–32 km Peak Run (25k easy + last 5k @ 7:05)", targetKm: 31, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 13,
+        dates: "Dec 28 – Jan 03",
+        focus: "Taper 1: Drop volume 25%",
+        plannedTotal: 38,
+        runs: [
+          { day: "Mon", type: "easy", name: "7 km easy", targetKm: 7, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "7 km MP (1k warm + 5k @ 7:00 + 1k cool)", targetKm: 7, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "4 km easy", targetKm: 4, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "20 km easy", targetKm: 20, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 14,
+        dates: "Jan 04 – Jan 10",
+        focus: "Taper 2: Prioritize sleep and carbs",
+        plannedTotal: 26,
+        runs: [
+          { day: "Mon", type: "easy", name: "6 km easy", targetKm: 6, done: false, actualKm: null },
+          { day: "Wed", type: "quality", name: "5 km easy (incl. 2 km @ 7:00)", targetKm: 5, done: false, actualKm: null },
+          { day: "Fri", type: "easy", name: "3 km easy", targetKm: 3, done: false, actualKm: null },
+          { day: "Sat", type: "long", name: "12 km easy", targetKm: 12, done: false, actualKm: null }
+        ]
+      },
+      {
+        week: 15,
+        dates: "Jan 11 – Jan 17",
+        focus: "RACE DAY: Sunday, Jan 17 (42.2 km) — Sub-5h Goal!",
+        plannedTotal: 51.2,
+        runs: [
+          { day: "Mon", type: "easy", name: "4 km easy", targetKm: 4, done: false, actualKm: null },
+          { day: "Wed", type: "easy", name: "3 km shakeout (Wed)", targetKm: 3, done: false, actualKm: null },
+          { day: "Fri", type: "rest", name: "Rest (Fri)", targetKm: 0, done: true, actualKm: 0 },
+          { day: "Sat/Sun", type: "race", name: "2 km shakeout (Sat) + 42.2 km RACE (Sun)", targetKm: 44.2, done: false, actualKm: null }
+        ]
+      }
+    ];
+
+    // State
+    const STORAGE_KEY = 'marathon_sub5_plan_data_v1';
+    let planData = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          planData = JSON.parse(saved);
+        } catch(e) {
+          planData = JSON.parse(JSON.stringify(DEFAULT_PLAN));
+        }
+      } else {
+        planData = JSON.parse(JSON.stringify(DEFAULT_PLAN));
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(planData));
+      updateDashboard();
+      showToast("Progress saved");
+    }
+
+    // Toggle run completion
+    function toggleRun(weekIdx, runIdx) {
+      const run = planData[weekIdx].runs[runIdx];
+      run.done = !run.done;
+      if (run.done) {
+        if (run.actualKm === null || run.actualKm === undefined || run.actualKm === 0) {
+          run.actualKm = run.targetKm;
+        }
+      }
+      saveState();
+      renderWeeks();
+    }
+
+    // Update actual distance
+    function updateActualKm(weekIdx, runIdx, val) {
+      const num = parseFloat(val);
+      const run = planData[weekIdx].runs[runIdx];
+      if (!isNaN(num) && num >= 0) {
+        run.actualKm = num;
+        if (num > 0) run.done = true;
+      } else if (val === '' || val === null) {
+        run.actualKm = null;
+      }
+      saveState();
+      renderWeeks();
+    }
+
+    function stepKm(weekIdx, runIdx, delta) {
+      const run = planData[weekIdx].runs[runIdx];
+      let current = (run.actualKm !== null && run.actualKm !== undefined) ? run.actualKm : run.targetKm;
+      let next = Math.max(0, Math.round((current + delta) * 10) / 10);
+      run.actualKm = next;
+      run.done = next > 0;
+      saveState();
+      renderWeeks();
+    }
+
+    function toggleWeekOpen(cardId) {
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.classList.toggle('open');
+      }
+    }
+
+    // Calculate Week Actual
+    function getWeekActual(week) {
+      return week.runs.reduce((acc, r) => {
+        if (r.done && r.actualKm !== null && r.actualKm !== undefined) {
+          return acc + Number(r.actualKm);
+        }
+        return acc;
+      }, 0);
+    }
+
+    // Dashboard calculations
+    function updateDashboard() {
+      let totalPlanned = 0;
+      let totalActual = 0;
+      let totalRuns = 0;
+      let runsDone = 0;
+
+      planData.forEach(w => {
+        totalPlanned += w.plannedTotal;
+        w.runs.forEach(r => {
+          if (r.type !== 'rest') {
+            totalRuns++;
+            if (r.done) runsDone++;
+          }
+          if (r.done && r.actualKm) {
+            totalActual += Number(r.actualKm);
+          }
+        });
+      });
+
+      totalActual = Math.round(totalActual * 10) / 10;
+      const pct = totalPlanned > 0 ? Math.round((totalActual / totalPlanned) * 100) : 0;
+      const remaining = Math.max(0, Math.round((totalPlanned - totalActual) * 10) / 10);
+
+      document.getElementById('totalDoneVal').textContent = `${totalActual} km`;
+      document.getElementById('totalPlanVal').textContent = `${totalPlanned} km`;
+      document.getElementById('runsCountVal').textContent = `${runsDone} / ${totalRuns}`;
+      document.getElementById('percentVal').textContent = `${pct}%`;
+      document.getElementById('overallProgressBar').style.width = `${Math.min(100, pct)}%`;
+      document.getElementById('progressSummaryText').textContent = `${remaining} km remaining`;
+    }
+
+    // Render Weeks
+    function renderWeeks() {
+      const container = document.getElementById('weeksList');
+      container.innerHTML = '';
+
+      planData.forEach((week, wIdx) => {
+        const weekActual = Math.round(getWeekActual(week) * 10) / 10;
+        const nonRestRuns = week.runs.filter(r => r.type !== 'rest');
+        const isCompleted = nonRestRuns.length > 0 && nonRestRuns.every(r => r.done);
+        
+        // Filter checks
+        if (currentFilter === 'pending' && isCompleted) return;
+        if (currentFilter === 'done' && !isCompleted) return;
+        if (currentFilter === 'current' && week.week !== 2) return; // default active week
+
+        // Search query check
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchFocus = week.focus.toLowerCase().includes(q);
+          const matchDates = week.dates.toLowerCase().includes(q);
+          const matchRuns = week.runs.some(r => r.name.toLowerCase().includes(q));
+          if (!matchFocus && !matchDates && !matchRuns) return;
+        }
+
+        const isCurrent = week.week === 2; // Week 2 is Oct 12-18
+        const isOpen = isCurrent || wIdx === 0;
+
+        const card = document.createElement('div');
+        card.className = `week-card ${isOpen ? 'open' : ''} ${isCurrent ? 'is-current' : ''} ${isCompleted ? 'is-completed' : ''}`;
+        card.id = `week-card-${week.week}`;
+
+        let runsHtml = '';
+        week.runs.forEach((run, rIdx) => {
+          let badgeClass = 'badge-easy';
+          if (run.type === 'quality') badgeClass = 'badge-quality';
+          else if (run.type === 'long') badgeClass = 'badge-long';
+          else if (run.type === 'rest') badgeClass = 'badge-rest';
+          else if (run.type === 'race') badgeClass = 'badge-race';
+
+          const actualDisplay = run.actualKm !== null && run.actualKm !== undefined ? run.actualKm : '';
+
+          runsHtml += `
+            <div class="run-card ${run.done ? 'completed' : ''}">
+              <div class="run-card-top">
+                <span class="run-day-badge ${badgeClass}">${run.day} • ${run.type.toUpperCase()}</span>
+                <div class="checkbox-wrap ${run.done ? 'checked' : ''}" onclick="toggleRun(${wIdx}, ${rIdx})">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+              </div>
+              <div class="run-desc">${run.name}</div>
+              <div class="run-footer">
+                <span class="km-label">Actual:</span>
+                <div class="actual-km-group">
+                  <button class="btn-step" onclick="stepKm(${wIdx}, ${rIdx}, -0.5)">-</button>
+                  <input type="number" step="0.1" class="actual-km-input" placeholder="${run.targetKm}" value="${actualDisplay}" onchange="updateActualKm(${wIdx}, ${rIdx}, this.value)" />
+                  <button class="btn-step" onclick="stepKm(${wIdx}, ${rIdx}, 0.5)">+</button>
+                  <span class="km-label">km</span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="week-header" onclick="toggleWeekOpen('week-card-${week.week}')">
+            <div class="week-title-wrap">
+              <span class="week-badge">WEEK ${week.week}</span>
+              <div>
+                <span class="week-dates">${week.dates}</span>
+                <div class="week-focus">${week.focus}</div>
+              </div>
+            </div>
+            <div class="week-right">
+              <div class="week-mileage">
+                <div class="mileage-actual">${weekActual} km</div>
+                <div class="mileage-target">of ${week.plannedTotal} km</div>
+              </div>
+              <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+          </div>
+          <div class="week-content">
+            <div class="runs-grid">
+              ${runsHtml}
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Filter by tab
+    function setFilter(type, btn) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderWeeks();
+    }
+
+    // Search filter
+    function filterWorkouts() {
+      searchQuery = document.getElementById('searchInput').value.trim();
+      renderWeeks();
+    }
+
+    // Countdown Timer logic
+    function updateCountdown() {
+      // Race Day: Sunday Jan 17 2027 at 06:00:00 (Standard HK Marathon start time)
+      const now = new Date();
+      // Target Jan 17 (use 2027 as titled in the plan)
+      let raceYear = now.getMonth() >= 1 ? now.getFullYear() + 1 : now.getFullYear();
+      if (now.getFullYear() === 2026 && now.getMonth() >= 9) raceYear = 2027;
+      const raceDate = new Date(`January 17, ${raceYear} 06:00:00`).getTime();
+      const diff = raceDate - now.getTime();
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / 1000 / 60) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('daysVal').textContent = days;
+        document.getElementById('hoursVal').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minsVal').textContent = String(mins).padStart(2, '0');
+        document.getElementById('secsVal').textContent = String(secs).padStart(2, '0');
+      } else {
+        document.getElementById('daysVal').textContent = "0";
+        document.getElementById('hoursVal').textContent = "00";
+        document.getElementById('minsVal').textContent = "00";
+        document.getElementById('secsVal').textContent = "00";
+      }
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('sub5_theme', next);
+    }
+
+    // Modals
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    function closeModalOnBg(e, id) {
+      if (e.target.id === id) closeModal(id);
+    }
+
+    // Toast
+    let toastTimeout;
+    function showToast(msg) {
+      const t = document.getElementById('toastMsg');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // Export / Import
+    function exportData() {
+      const blob = new Blob([JSON.stringify(planData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `hk_marathon_sub5_progress_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Progress file exported!");
+    }
+
+    function triggerImport() {
+      document.getElementById('fileInput').click();
+    }
+
+    function importData(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const imported = JSON.parse(evt.target.result);
+          if (Array.isArray(imported) && imported.length > 0) {
+            planData = imported;
+            saveState();
+            renderWeeks();
+            showToast("Progress successfully imported!");
+          }
+        } catch(err) {
+          alert("Invalid JSON format");
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+
+    // Service Worker Registration for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    // Initialize
+    (function init() {
+      const savedTheme = localStorage.getItem('sub5_theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+      loadState();
+      updateDashboard();
+      renderWeeks();
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+</body>
+</html>
